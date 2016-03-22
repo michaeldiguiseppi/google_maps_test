@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+
+  <div class="container">
+
+    {% set stepNum = 1 %}
+    {% for step in steps %}
+      <div>
+        Step {{ stepNum }}
+      </div>
+      <ul>
+        <li>
+          {{ step.distance.text }}
+        </li>
+        <li>
+          {{ step.duration.text }}
+        </li>
+        <li>
+          {{ step.html_instructions | raw }}
+        </li>
+      </ul>
+      {% set stepNum = stepNum + 1 %}
+    {% endfor %}
+
+  </div>
+
+{% endblock %}
