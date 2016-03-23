@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/directions', function(req, res, next) {
+router.post('/', function(req, res, next) {
   var start = req.body.start;
   var end = req.body.end;
 
@@ -23,13 +23,10 @@ router.post('/directions', function(req, res, next) {
     if (error) throw new Error(error);
 
     console.log(JSON.parse(body));
-    var steps = JSON.parse(body).routes[0].legs[0].steps;
-    res.render('steps', {steps: steps});
+    var steps = JSON.parse(body).routes[0].legs[0];
+    //res.json(JSON.parse(body));
+    res.render('index', {steps: steps.steps, duration: steps.duration.text, distance: steps.distance.text, start: steps.start_address, end: steps.end_address});
   });
-});
-
-router.get('/directions', function(req, res, next) {
-    res.render('steps');
 });
 
 module.exports = router;

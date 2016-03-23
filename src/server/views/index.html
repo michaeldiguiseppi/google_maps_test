@@ -7,15 +7,63 @@
 
   <div class="container">
 
-    <h1>{{ title }}</h1>
-    <p>Welcome to {{ title }}</p>
+    <h1>Get Directions!</h1>
 
-    <form class="form-horizontal" method="POST" action="/directions">
-      <input type="text" class="form-control" name="start" />
-      <input type="text" class="form-control" name="end" />
-      <button type="submit">Get Directions</button>
+    <form class="form-horizontal" method="POST" action="/">
+      <div class="row">
+        <div class="col-lg-2">
+          <label for="start">Start Address</label>
+        </div>
+        <div class="col-lg-10">
+          <input type="text" class="form-control" name="start" value="{{ start }}"/>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-lg-2">
+          <label for="end">End Address</label>
+        </div>
+        <div class="col-lg-10">
+          <input type="text" class="form-control" name="end" value="{{ end }}" />
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-lg-6">
+          <button type="submit" class="btn btn-success">Get Directions</button>
+        </div>
+      </div>
     </form>
-
+    <br />
+    <br />
+    {% if steps %}
+    <div class="directions">
+      {% set stepNum = 1 %}
+      <table class="table table-striped table-bordered">
+        <thead>
+          <th>#</th>
+          <th>Distance</th>
+          <th>Duration</th>
+          <th>Instructions</th>
+        </thead>
+        <tbody>
+          {% for step in steps %}
+            <tr>
+              <td>{{ stepNum }}</td>
+              <td>{{ step.distance.text }}</td>
+              <td>{{ step.duration.text }}</td>
+              <td>{{ step.html_instructions | raw }}</td>
+            </tr>
+            {% set stepNum = stepNum + 1 %}
+          {% endfor %}
+            <tr>
+              <th>Totals</th>
+              <td>{{ distance  }}</td>
+              <td>{{ duration }}</td>
+            </tr>
+        </tbody>
+      </table>
+    {% endif %}
 
   </div>
 
