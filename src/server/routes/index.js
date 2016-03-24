@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
     console.log(JSON.parse(body));
     var steps = JSON.parse(body).routes[0].legs[0];
     //res.json(JSON.parse(body));
-    res.render('index', {steps: steps.steps, duration: steps.duration.text, distance: steps.distance.text, start: steps.start_address, end: steps.end_address});
+    res.render('index', {steps: steps.steps, duration: steps.duration.text, distance: steps.distance.text, start: steps.start_address, end: steps.end_address, api_key: process.env.MAPS_API_KEY});
   });
 });
 
