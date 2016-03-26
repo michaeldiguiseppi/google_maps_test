@@ -4,7 +4,7 @@ var request = require('request');
 
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express', api_key: process.env.MAPS_API_KEY });
 });
 
 router.post('/', function(req, res, next) {

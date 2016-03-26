@@ -14,7 +14,7 @@
           <label for="start">Start Address</label>
         </div>
         <div class="col-lg-10">
-          <input type="text" class="form-control" name="start" value="{{ start }}"/>
+          <input type="text" class="form-control" name="start" id="start" value="{{ start }}"/>
         </div>
       </div>
       <br />
@@ -23,13 +23,13 @@
           <label for="end">End Address</label>
         </div>
         <div class="col-lg-10">
-          <input type="text" class="form-control" name="end" value="{{ end }}" />
+          <input type="text" class="form-control" name="end" id="end" value="{{ end }}" />
         </div>
       </div>
       <br />
       <div class="row">
         <div class="col-lg-6">
-          <button type="submit" class="btn btn-success">Get Directions</button>
+          <button type="submit" class="btn btn-success" id="submit">Get Directions</button>
         </div>
       </div>
     </form>
@@ -65,8 +65,10 @@
     {% endif %}
   </div>
   <br />
-  <div id="map">
+  <div class="map-container">
+    <div id="map">
 
+    </div>
   </div>
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=initMap">
