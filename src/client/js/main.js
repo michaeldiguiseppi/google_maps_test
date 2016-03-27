@@ -9,22 +9,25 @@ $(document).on('ready', function() {
 });
 
 function initMap() {
-    var directionsService = new google.maps.DirectionsService;
-    var directionsDisplay = new google.maps.DirectionsRenderer;
+  var directionsService = new google.maps.DirectionsService;
+  var directionsDisplay = new google.maps.DirectionsRenderer;
 
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 10,
-    });
-    navigator.geolocation.getCurrentPosition(function(position) {
-      initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-      map.setCenter(initialLocation);
-    });
-    directionsDisplay.setMap(map);
-    var onChangeHandler = function() {
-      calculateAndDisplayRoute(directionsService, directionsDisplay);
-    };
-    document.getElementById('submit').addEventListener('click', onChangeHandler);
-  }
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 10,
+  });
+  navigator.geolocation.getCurrentPosition(function(position) {
+    initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+    map.setCenter(initialLocation);
+  });
+
+  calculateAndDisplayRoute(directionsService, directionsDisplay);
+
+  directionsDisplay.setMap(map);
+  var onChangeHandler = function() {
+    calculateAndDisplayRoute(directionsService, directionsDisplay);
+  };
+  document.getElementById('submit').addEventListener('click', onChangeHandler);
+}
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
   directionsService.route({
@@ -34,8 +37,6 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
   }, function(response, status) {
     if (status === google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(response);
-    } else {
-      window.alert('Directions request failed due to ' + status);
     }
   });
 }
